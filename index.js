@@ -16,6 +16,7 @@ replicationprocess=false
 
 verb("replication start","debug","Pushtocouch");
 
+
     replicationprocess=true;
     dbfrom.replicate.to(toremote, {
       retry: true
