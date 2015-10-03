@@ -20,7 +20,7 @@ dbb.get("test").then(function(){
 
   }).catch(function(err){
     verb(err,"error","booh")
-    rm.dir('../aa')
+    rm.dir('./aa')
   });
 
 })
