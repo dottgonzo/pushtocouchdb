@@ -6,7 +6,7 @@ PouchDB=require('pouchdb');
 module.exports = function(from,to) {
   return new Promise(function (resolve, reject) {
 
-  if (typeof variable === 'undefined') {
+  if (typeof replicationprocess === 'undefined') {
 replicationprocess=false
 
   }
