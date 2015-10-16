@@ -1,8 +1,10 @@
 var verb=require('verbo'),
+Promise=require('promise'),
 PouchDB=require('pouchdb');
 
 
-module.exports = function(from,to,callback) {
+module.exports = function(from,to) {
+  return new Promise(function (resolve, reject) {
 
   if (typeof variable === 'undefined') {
 replicationprocess=false
@@ -18,36 +20,49 @@ verb("replication start","debug","Pushtocouch");
 
 
     replicationprocess=true;
-    dbfrom.replicate.to(toremote, {
-      retry: true
-    }).then(function(){
+    dbfrom.replicate.to(toremote).on('complete', function () {
+
       verb("replication","debug","Pushtocouch")
 
       dbfrom.destroy().then(function(){
 
         replicationprocess=false;
         verb("replication process ended","info","Pushtocouch")
-if(callback){
-  callback()
-}
+        resolve({success:true,replication:'complete'});
+
 
 
       }).catch(function(err){
         replicationprocess=false;
-        verb(err,"error","Pushtocouch")
+        verb(err,"error","Pushtocouch");
+        reject(err)
 
       });
 
-    }).catch(function(err){
+}).on('error', function (err) {
+  verb('errorrrr','error','localdb');
+
+  reject(err)
+}).catch(function(err){
+  verb('error on get all documents','error','localdb');
+  reject(err)
+})
+
+  } else{
+    resolve({success:true,replication:'active'});
+
+  }
+  }).catch(function(err){
       replicationprocess=false;
-      verb("replication crash","error","Pushtocouch")
+      verb("replication crash","error","Pushtocouch");
+      reject(err)
+
 
     });
 
 
-  }
-}).catch(function(err){
-  verb('error on get all documents','error','localdb')
+
+
 })
 
-}
+  }
