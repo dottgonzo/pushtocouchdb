@@ -41,11 +41,14 @@ verb("replication start","debug","Pushtocouch");
 
 }).on('error', function (err) {
   verb('errorrrr','error','localdb');
+  replicationprocess=false
 
   reject(err)
 }).catch(function(err){
   verb('error on get all documents','error','localdb');
-  reject(err)
+  reject(err);
+  replicationprocess=false
+
 })
 
   } else{
