@@ -19,7 +19,7 @@
     "url": "https://github.com/dottgonzo/pushtocouchdb/issues"
   },
   "dependencies": {
-    "pouchdb": "^4.0.3",
+    "pouchdb": "^5.0.0",
     "promise": "^7.0.4",
     "verbo": "0.0.7"
   },
