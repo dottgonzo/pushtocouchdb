@@ -40,7 +40,7 @@ verb("replication start","debug","Pushtocouch");
       });
 
 }).on('error', function (err) {
-  verb('errorrrr','error','localdb');
+  verb(err,'error','localdb replication online error');
   replicationprocess=false
 
   reject(err)
@@ -57,7 +57,7 @@ verb("replication start","debug","Pushtocouch");
   }
   }).catch(function(err){
       replicationprocess=false;
-      verb("replication crash","error","Pushtocouch");
+      verb(err,"error","Pushtocouch replication crash");
       reject(err)
 
 
